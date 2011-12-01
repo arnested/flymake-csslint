@@ -1,11 +1,13 @@
 ;;; flymake-csslint.el --- making flymake work with CSSLint
 
 ;; Copyright (C) 2011 Wilfred Hughes <me@wilfred.me.uk>
-;; Copyright (C) 2011 Arne J,Ax(Brgensen <arne@arnested.dk>
+;; Copyright (C) 2011 Arne Jørgensen <arne@arnested.dk>
 
-;; Author: Arne J,Ax(Brgensen <arne@arnested.dk>
+;; Author: Arne Jørgensen <arne@arnested.dk>
+;; URL: https://github.com/arnested/flymake-csslint
 ;; Created: 1 December 2011
-;; Version: 1.0
+;; Version: 1.x-dev
+;; Package-Requires: ((flymake "0.3"))
 ;; Keywords: flymake, csslint, css
 
 ;; This file is not part of GNU Emacs.
@@ -26,7 +28,7 @@
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-;;; Commentary
+;;; Commentary:
 
 ;; To use CSSLint with emacs, you will need CSSLint installed and available on
 ;; your path. You should be able to do
@@ -43,7 +45,7 @@
 ;; flymake-csslint.el is very much based on flymake-jshint.el by
 ;; Wilfred Hughes <me@wilfred.me.uk>.
 
-;;; Usage
+;;; Usage:
 
 ;; Add to your emacs config:
 
@@ -55,7 +57,7 @@
 
 ;; (add-to-list 'load-path "~/.emacs.d/path/to/flymake-csslint.el")
 
-;;; Debugging
+;;; Debugging:
 
 ;; If CSSLint isn't working for any reason, execute
 
@@ -63,6 +65,8 @@
 
 ;; and you will see what is going wrong listed in the *Messages*
 ;; buffer.
+
+;;; Code:
 
 (require 'flymake)
 
@@ -89,6 +93,12 @@
 ; load flymake automatically in CSS mode
 (add-hook 'css-mode-hook 'flymake-mode)
 
+
+
 (provide 'flymake-csslint)
 
-;;; flymake-csslint.el ends herep
+;; Local Variables:
+;; coding: utf-8
+;; End:
+
+;;; flymake-csslint.el ends here

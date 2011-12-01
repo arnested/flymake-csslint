@@ -1,7 +1,8 @@
 # flymake-csslint.el
 
-To use CSSLint with emacs, you will need CSSLint installed and available on
-your path. You should be able to do
+To use [CSSLint](https://github.com/stubbornella/csslint) with emacs,
+you will need CSSLint installed and available on your path. You should
+be able to do
 
 	$ csslint
 
