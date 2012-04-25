@@ -15,4 +15,4 @@ File: dir,	Node: Top	This is the top of the INFO tree
 * Menu:
 
 Programming
-* Flymake CSSLinr: (flymake-csslint).                 Making flymake work with CSSLint.
+* Flymake CSSLint: (flymake-csslint).                 Making flymake work with CSSLint.
