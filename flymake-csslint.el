@@ -1,12 +1,12 @@
 ;;; flymake-csslint.el --- making flymake work with CSSLint
 
+;; Copyright (C) 2011, 2012 Arne Jørgensen <arne@arnested.dk>
 ;; Copyright (C) 2011 Wilfred Hughes <me@wilfred.me.uk>
-;; Copyright (C) 2011 Arne Jørgensen <arne@arnested.dk>
 
 ;; Author: Arne Jørgensen <arne@arnested.dk>
 ;; URL: https://github.com/arnested/flymake-csslint
 ;; Created: 1 December 2011
-;; Version: 1.0.1
+;; Version: 1.1.0
 ;; Package-Requires: ((flymake "0.3"))
 ;; Keywords: flymake, csslint, css
 
@@ -70,28 +70,40 @@
 
 (require 'flymake)
 
+(defgroup flymake-csslint nil
+  "Flymake CCSlint configuration."
+  :group 'flymake)
+
+(defcustom flymake-csslint-program (executable-find "csslint")
+  "Name of the CSSLint program."
+  :type '(choice (file :tag "Location of csslint")
+                 (const :tag "csslint is not installed"))
+  :group 'flymake-csslint)
+
+;;;###autoload
 (defun flymake-csslint-init ()
   (let* ((temp-file (flymake-init-create-temp-buffer-copy
-		     'flymake-create-temp-inplace))
+                     (if (fboundp 'flymake-create-temp-copy)
+                         'flymake-create-temp-copy
+                       'flymake-create-temp-inplace)))
          (local-file (file-relative-name
 		      temp-file
 		      (file-name-directory buffer-file-name))))
-    (list "csslint" (list "--format=compact" local-file))))
+    (list flymake-csslint-program (list "--format=compact" local-file))))
 
-(setq flymake-allowed-file-name-masks
-      (cons '(".+\\.css$"
-	      flymake-csslint-init
-	      flymake-simple-cleanup
-	      flymake-get-real-file-name)
-	    flymake-allowed-file-name-masks))
-
-(setq flymake-err-line-patterns
-      (cons '("^\\(.*\\): line \\([[:digit:]]+\\), col \\([[:digit:]]+\\), \\(.+\\)$"
-	      1 2 3 4)
-	    flymake-err-line-patterns))
-
-; load flymake automatically in CSS mode
-(add-hook 'css-mode-hook 'flymake-mode)
+;;;###autoload
+(eval-after-load 'flymake
+  '(progn
+     (add-to-list 'flymake-allowed-file-name-masks
+                  '(".+\\.css$"
+                    flymake-csslint-init
+                    flymake-simple-cleanup
+                    flymake-get-real-file-name))
+     (add-to-list 'flymake-err-line-patterns
+                  '("^\\(.*\\): line \\([[:digit:]]+\\), col \\([[:digit:]]+\\), \\(.+\\)$"
+                    1 2 3 4))
+     ;; load flymake automatically in CSS mode
+     (add-hook 'css-mode-hook (lambda() (flymake-mode 1)) t)))
 
 
 
