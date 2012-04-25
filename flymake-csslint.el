@@ -6,7 +6,7 @@
 ;; Author: Arne Jørgensen <arne@arnested.dk>
 ;; URL: https://github.com/arnested/flymake-csslint
 ;; Created: 1 December 2011
-;; Version: 1.0.1
+;; Version: 1.1.0
 ;; Package-Requires: ((flymake "0.3"))
 ;; Keywords: flymake, csslint, css
 
